@@ -19,36 +19,36 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public ResponseEntity<?> save(CustomerDto customerDto) {
-        try {
+            try {
 
-            CustomerEntity customerEntity =null;
-            if(customerDto.getId()!= null){
-                customerEntity = customerDao.findById(customerDto.getId()).get();
-            }else{
-                customerEntity = new CustomerEntity();
-                customerEntity.setId(UUID.randomUUID().toString());
-                customerEntity.setCreateBy(customerDto.getUser());
-                customerEntity.setCreateDate(new Date());
+                CustomerEntity customerEntity =null;
+                if(customerDto.getId()!= null){
+                    customerEntity = customerDao.findById(customerDto.getId()).get();
+                }else{
+                    customerEntity = new CustomerEntity();
+                    customerEntity.setId(UUID.randomUUID().toString());
+                    customerEntity.setCreateBy(customerDto.getUser());
+                    customerEntity.setCreateDate(new Date());
+                }
+
+                customerEntity.setAddress(customerDto.getAddress());
+                customerEntity.setBirthDay(customerDto.getBirthDay());
+                customerEntity.setCity(customerDto.getCity());
+                customerEntity.setEmail(customerDto.getEmail());
+                customerEntity.setFullName(customerDto.getFullName());
+                customerEntity.setMobileNo(customerDto.getMobileNo());
+                customerEntity.setNicNo(customerDto.getNicNo());
+                customerEntity.setOccupation(customerDto.getOccupation());
+                customerEntity.setPostalCode(customerDto.getPostalCode());
+                customerEntity.setStatus("ACTIVE");
+                customerDao.save(customerEntity);
+
+                return new ResponseEntity<>("200", HttpStatus.OK);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
-            customerEntity.setAddress(customerDto.getAddress());
-            customerEntity.setBirthDay(customerDto.getBirthDay());
-            customerEntity.setCity(customerDto.getCity());
-            customerEntity.setEmail(customerDto.getEmail());
-            customerEntity.setFullName(customerDto.getFullName());
-            customerEntity.setMobileNo(customerDto.getMobileNo());
-            customerEntity.setNicNo(customerDto.getNicNo());
-            customerEntity.setOccupation(customerDto.getOccupation());
-            customerEntity.setPostalCode(customerDto.getPostalCode());
-            customerEntity.setStatus("ACTIVE");
-            customerDao.save(customerEntity);
-
-            return new ResponseEntity<>("200", HttpStatus.OK);
-
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @Override
