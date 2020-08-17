@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CustomerDao extends JpaRepository<CustomerEntity ,String> {
     List<CustomerEntity> findAllByStatus(String active);
+
+    long countAllByStatus(String acTiVE);
 }

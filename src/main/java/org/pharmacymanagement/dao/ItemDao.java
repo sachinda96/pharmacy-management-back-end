@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ItemDao extends JpaRepository<ItemEntity,String> {
     List<ItemEntity> findAllByStatus(String active);
+
+    long countAllByStatus(String acTiVE);
+
+    long countAllByStatusAndQty(String acTiVE, int i);
 }
