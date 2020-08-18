@@ -3,6 +3,7 @@ package org.pharmacymanagement.service.impl;
 import org.pharmacymanagement.dao.ItemDao;
 import org.pharmacymanagement.dao.OrderDao;
 import org.pharmacymanagement.dao.OrderDetailDao;
+import org.pharmacymanagement.dto.OrderDetailsDto;
 import org.pharmacymanagement.dto.OrderDto;
 import org.pharmacymanagement.entity.ItemEntity;
 import org.pharmacymanagement.entity.OrderDetailsEntity;
@@ -61,13 +62,40 @@ public class OrderServiceImpl implements OrderService {
 
             }
 
-
             return new ResponseEntity<>("204",HttpStatus.NO_CONTENT);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
 
+
+    }
+
+    @Override
+    public ResponseEntity<?> getAllOrders() {
+
+        try {
+
+           List<OrderDetailsEntity> orderDetailsEntities = orderDetailDao.findAll();
+
+           List<OrderDetailsDto> orderDetailsDtoList = new ArrayList<>();
+
+           if(orderDetailsEntities != null){
+               for (OrderDetailsEntity orderDetailsEntity : orderDetailsEntities) {
+                   OrderDetailsDto orderDetailsDto = new OrderDetailsDto();
+                   orderDetailsDto.setCustomerName(orderDetailsEntity.getCustomerName());
+                   orderDetailsDto.setDate(orderDetailsEntity.getOrderEntity().getOrderDate());
+                   orderDetailsDto.setItemName(orderDetailsEntity.getItemEntity().getName());
+                   orderDetailsDto.setQty(orderDetailsEntity.getQty().toString());
+                   orderDetailsDtoList.add(orderDetailsDto);
+               }
+           }
+
+           return new ResponseEntity<>(orderDetailsDtoList,HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 

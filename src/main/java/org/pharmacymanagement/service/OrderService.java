@@ -8,4 +8,6 @@ import java.util.List;
 public interface OrderService {
 
     public ResponseEntity<?> placeOrder(List<OrderDto> orderDtoList);
+
+    public ResponseEntity<?> getAllOrders();
 }
