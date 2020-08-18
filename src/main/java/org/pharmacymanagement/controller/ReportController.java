@@ -1,12 +1,12 @@
 package org.pharmacymanagement.controller;
 
+import org.pharmacymanagement.dto.OrderDate;
 import org.pharmacymanagement.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @CrossOrigin
@@ -24,5 +24,10 @@ public class ReportController {
     @GetMapping(value = "/customer",produces = "application/pdf")
     public ResponseEntity<?> allCustomerReport()throws Exception{
         return reportService.allCustomerReport();
+    }
+
+    @PostMapping(value = "/order",produces = "application/pdf")
+    public ResponseEntity<?> allOrderReport(@RequestBody OrderDate orderDate)throws Exception{
+        return reportService.allOrderReport(orderDate.getStartDate(), orderDate.getEndDate());
     }
 }

@@ -21,4 +21,10 @@ public class OrderController {
     public ResponseEntity<?> placeOrder(@RequestBody List<OrderDto> orderDtoList){
         return orderService.placeOrder(orderDtoList);
     }
+
+    @GetMapping
+    public ResponseEntity<?> getAllOrders(){
+        return orderService.getAllOrders();
+    }
+
 }

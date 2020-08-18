@@ -24,12 +24,12 @@ public class UserController {
         return userService.getAll();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> remove(@PathVariable String id){
         return  userService.remove(id);
     }
 
-    @PutMapping
+    @GetMapping(value = "/firstUser")
     public ResponseEntity<?> firstUser(){
         return userService.firstUser();
     }

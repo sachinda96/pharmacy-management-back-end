@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
         userDto.setRole(userEntity.getRole());
         userDto.setUserName(userEntity.getUserName());
         userDto.setNicNo(userEntity.getNicNo());
-        userDto.setUserName(userEntity.getUserName());
+        userDto.setName(userEntity.getName());
         return userDto;
     }
 

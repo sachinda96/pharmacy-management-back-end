@@ -1,9 +1,6 @@
 package org.pharmacymanagement.service.impl;
 
-import org.pharmacymanagement.dao.CustomerDao;
-import org.pharmacymanagement.dao.ItemDao;
-import org.pharmacymanagement.dao.OrderDao;
-import org.pharmacymanagement.dao.OrderDetailDao;
+import org.pharmacymanagement.dao.*;
 import org.pharmacymanagement.dto.OrderDetailsDto;
 import org.pharmacymanagement.entity.OrderDetailsEntity;
 import org.pharmacymanagement.service.DashboardService;
@@ -29,6 +26,9 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public ResponseEntity<?> totalOrders() {
@@ -72,7 +72,14 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public ResponseEntity<?> totalUser() {
-        return null;
+
+        try {
+
+            return new ResponseEntity<>(userDao.count(),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
