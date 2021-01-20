@@ -13,4 +13,6 @@ public interface UserService {
 
     public ResponseEntity<?> firstUser();
 
+    public ResponseEntity<?> getUserRole(String id);
+
 }

@@ -115,6 +115,24 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public ResponseEntity<?> getUserRole(String id) {
+
+        try {
+
+            UserEntity userEntity =userDao.findById(id).get();
+            UserDto userDto = new UserDto();
+            userDto.setRole(userEntity.getRole());
+
+            return new ResponseEntity<>(userDto,HttpStatus.OK);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     public UserEntity setUserEntity(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
         userEntity.setAddress(userDto.getAddress());

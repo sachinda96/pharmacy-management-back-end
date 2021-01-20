@@ -16,6 +16,7 @@ public class ItemEntity {
     private String createBy;
     private Date createDate;
     private Integer qty;
+    private String location;
 
     @Column(columnDefinition="Decimal(10,2)")
     private Double price =100.1;
@@ -100,5 +101,13 @@ public class ItemEntity {
 
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

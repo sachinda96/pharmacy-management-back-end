@@ -34,4 +34,9 @@ public class UserController {
         return userService.firstUser();
     }
 
+    @GetMapping(value = "/getUserRole/{id}")
+    public ResponseEntity<?> getUserRole(@PathVariable  String id){
+        return userService.getUserRole(id);
+    }
+
 }
